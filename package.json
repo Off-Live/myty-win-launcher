@@ -1,17 +1,18 @@
 {
-  "name": "launcher",
-  "productName": "launcher",
-  "description": "My Electron application description",
+  "name": "myty-launcher",
+  "productName": "MYTY Launcher",
+  "description": "MYTY Camera launcher",
   "keywords": [],
   "main": "./main.js",
   "version": "1.0.0",
-  "author": "purpleworks",
+  "author": "OFF LIVE",
   "private": true,
   "scripts": {
     "start": "electron ."
   },
   "dependencies": {},
   "devDependencies": {
-    "electron": "18.2.3"
+    "electron": "18.2.3",
+    "electron-builder": "^23.1.0"
   }
 }
