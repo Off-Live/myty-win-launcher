@@ -1,0 +1,17 @@
+{
+  "name": "launcher",
+  "productName": "launcher",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "purpleworks",
+  "private": true,
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "18.2.3"
+  }
+}
