@@ -6,9 +6,12 @@ const MytyClient = require("./mytyClient");
 var myty;
 var mainWindow;
 var processCommand;
+var buildConfig = require("./build-config.json");
+var appName = buildConfig.AppName;
+var protocol = buildConfig.Protocol;
 
 function runMytyCamera() {
-  shell.openPath("MYTY Camera Prototype.exe").then((r) => {
+  shell.openPath(appName + ".exe").then((r) => {
     app.quit();
   });
 }
@@ -19,6 +22,7 @@ function createWindow() {
     width: 400,
     height: 400,
     frame: false,
+    transparent: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -33,12 +37,12 @@ function createWindow() {
 
 if (process.defaultApp) {
   if (process.argv.length >= 2) {
-    app.setAsDefaultProtocolClient("offlive", process.execPath, [
+    app.setAsDefaultProtocolClient(protocol, process.execPath, [
       path.resolve(process.argv[1]),
     ]);
   }
 } else {
-  app.setAsDefaultProtocolClient("offlive");
+  app.setAsDefaultProtocolClient(protocol);
 }
 
 const gotTheLock = app.requestSingleInstanceLock();
@@ -75,9 +79,8 @@ if (!gotTheLock) {
         // Keep only command line / deep linked arguments
         const deeplinkUrl = processCommand[processCommand.length - 1];
 
-        if (deeplinkUrl.startsWith("offlive://") === true) {
-          const walletAddress = deeplinkUrl.split("offlive:///?signature=")[1];
-          myty.linkWalletAddress(walletAddress);
+        if (deeplinkUrl.startsWith(protocol + "://") === true) {
+          myty.linkDeeplink(deeplinkUrl);
         }
       }
     });
@@ -96,9 +99,8 @@ if (!gotTheLock) {
   });
 
   app.on("open-url", (event, url) => {
-    if (myty.connected && url.startsWith("offlive://") === true) {
-      const walletAddress = url.split("offlive:///?signature=")[1];
-      myty.linkWalletAddress(walletAddress);
+    if (myty.connected && url.startsWith(protocol + "://") === true) {
+      myty.linkDeeplink(url);
     }
   });
 
