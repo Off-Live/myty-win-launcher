@@ -52,10 +52,10 @@ class MytyClient extends EventEmitter {
     });
   }
 
-  linkWalletAddress(walletAddress) {
+  linkDeeplink(deeplinkUrl) {
     if (this.connected === false) return;
     this.socket.write(
-      JSON.stringify({ cmd: "linkWalletAddress", walletAddress }) + "\r\n"
+      JSON.stringify({ cmd: "linkDeeplink", deeplinkUrl }) + "\r\n"
     );
   }
 
