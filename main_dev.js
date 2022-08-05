@@ -6,8 +6,8 @@ const MytyClient = require("./mytyClient");
 var myty;
 var mainWindow;
 var processCommand;
-var appName = "MYTYCamera";
-var protocol = "mytycam";
+var appName = "MYTYCameraDev";
+var protocol = "mytycamdev";
 
 function runMytyCamera() {
   shell.openPath(appName + ".exe").then((r) => {
